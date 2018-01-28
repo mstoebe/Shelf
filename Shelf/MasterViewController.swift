@@ -6,13 +6,13 @@
 //  Copyright © 2018 Markus Stöbe. All rights reserved.
 //
 
+import MobileCoreServices
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 
 	var detailViewController: DetailViewController? = nil
 	var objects = [Any]()
-
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,6 +25,12 @@ class MasterViewController: UITableViewController {
 		    let controllers = split.viewControllers
 		    detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
 		}
+
+		//******************************************************************************************************************
+		//* MARK: - UIDropInteraction vorbereiten
+		//******************************************************************************************************************
+		let dropInteraction = UIDropInteraction(delegate: self)
+		self.tableView.addInteraction(dropInteraction)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -32,10 +38,16 @@ class MasterViewController: UITableViewController {
 		super.viewWillAppear(animated)
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	//******************************************************************************************************************
+	//* MARK: - UIDropInteractionDelegate
+	//******************************************************************************************************************
+	func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+		return session.hasItemsConforming(toTypeIdentifiers: [kUTTypeText as String])
 	}
+
+	
+
+
 
 	@objc
 	func insertNewObject(_ sender: Any) {
