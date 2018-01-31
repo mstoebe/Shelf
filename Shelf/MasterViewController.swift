@@ -12,7 +12,7 @@ import UIKit
 class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 
 	var detailViewController: DetailViewController? = nil
-	var objects = [Any]()
+	var objects = [String]()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,23 +45,33 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 		return session.hasItemsConforming(toTypeIdentifiers: [kUTTypeText as String])
 	}
 
-	
+	func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+		return UIDropProposal(operation: .copy)
+	}
+
+	func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+		session.loadObjects(ofClass: String.self) { (items) in
+			let snippets = items as![String]
+			self.objects.append(contentsOf: snippets)
+		}
+	}
 
 
 
 	@objc
 	func insertNewObject(_ sender: Any) {
-		objects.insert(NSDate(), at: 0)
+		objects.insert("created string", at: 0)
 		let indexPath = IndexPath(row: 0, section: 0)
 		tableView.insertRows(at: [indexPath], with: .automatic)
 	}
 
+	//******************************************************************************************************************
 	// MARK: - Segues
-
+	//******************************************************************************************************************
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "showDetail" {
 		    if let indexPath = tableView.indexPathForSelectedRow {
-		        let object = objects[indexPath.row] as! NSDate
+		        let object = objects[indexPath.row]
 		        let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
 		        controller.detailItem = object
 		        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
@@ -70,8 +80,9 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 		}
 	}
 
+	//******************************************************************************************************************
 	// MARK: - Table View
-
+	//******************************************************************************************************************
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
@@ -83,8 +94,8 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-		let object = objects[indexPath.row] as! NSDate
-		cell.textLabel!.text = object.description
+		let object = objects[indexPath.row]
+		cell.textLabel!.text = object
 		return cell
 	}
 
