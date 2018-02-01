@@ -50,13 +50,11 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 	}
 
 	func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-		session.loadObjects(ofClass: String.self) { (items) in
-			let snippets = items as![String]
-			self.objects.append(contentsOf: snippets)
-		}
+		session.loadObjects(ofClass: String.self, completion: { items in
+			self.objects.append(contentsOf: items)
+			self.tableView.reloadData()
+		})
 	}
-
-
 
 	@objc
 	func insertNewObject(_ sender: Any) {
