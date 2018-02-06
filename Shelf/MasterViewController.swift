@@ -9,10 +9,11 @@
 import MobileCoreServices
 import UIKit
 
-class MasterViewController: UITableViewController, UIDropInteractionDelegate {
+class MasterViewController: UITableViewController, UIDropInteractionDelegate, UITableViewDragDelegate {
 
 	var detailViewController: DetailViewController? = nil
 	var objects = [String]()
+	var row = 0
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -27,10 +28,13 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 		}
 
 		//******************************************************************************************************************
-		//* MARK: - UIDropInteraction vorbereiten
+		//* MARK: - UIDrag- & UIDropInteraction vorbereiten
 		//******************************************************************************************************************
 		let dropInteraction = UIDropInteraction(delegate: self)
 		self.tableView.addInteraction(dropInteraction)
+
+		self.tableView.dragDelegate = self
+
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -50,18 +54,26 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 	}
 
 	func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-		session.loadObjects(ofClass: String.self, completion: { items in
+		_ = session.loadObjects(ofClass: String.self, completion: { items in
 			self.objects.append(contentsOf: items)
 			self.tableView.reloadData()
 		})
 	}
 
-	@objc
-	func insertNewObject(_ sender: Any) {
-		objects.insert("created string", at: 0)
-		let indexPath = IndexPath(row: 0, section: 0)
-		tableView.insertRows(at: [indexPath], with: .automatic)
+	//******************************************************************************************************************
+	//* MARK: - UIDragInteractionDelegate
+	//******************************************************************************************************************
+	func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+		var items = [UIDragItem]()
+
+		let selectedItem = self.objects[indexPath.row]
+		let itemProvider = NSItemProvider(object: selectedItem as NSItemProviderWriting)
+		let dragItem     = UIDragItem(itemProvider: itemProvider)
+		items.append(dragItem)
+
+		return items
 	}
+
 
 	//******************************************************************************************************************
 	// MARK: - Segues
@@ -110,6 +122,15 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate {
 		    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
 		}
 	}
+
+	@objc
+	func insertNewObject(_ sender: Any) {
+		objects.insert("created string", at: 0)
+		let indexPath = IndexPath(row: 0, section: 0)
+		tableView.insertRows(at: [indexPath], with: .automatic)
+	}
+
+
 
 
 }
