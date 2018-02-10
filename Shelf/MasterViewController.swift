@@ -15,6 +15,8 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 	var objects = [String]()
 	var row = 0
 
+	let appGroupIdentifier = "group.de.macundi.Shelf"
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -35,12 +37,44 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 
 		self.tableView.dragDelegate = self
 
+		//******************************************************************************************************************
+		//* MARK: - Speichern im Group-Conteiner vorbereiten
+		//******************************************************************************************************************
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
 		super.viewWillAppear(animated)
 	}
+
+
+	//******************************************************************************************************************
+	//* MARK: - Disk-IO
+	//******************************************************************************************************************
+	func save(items:[String]) {
+		let fileManager = FileManager.default
+		guard let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)
+		else {
+				return
+		}
+
+		for item in items {
+			let df = DateFormatter()
+			df.locale    = Locale(identifier: "de_DE")
+			df.dateStyle = .medium
+			df.timeStyle = .short
+
+			let path = groupURL.appendingPathComponent("snippet"+df.string(from: Date())+".txt")
+			print(path)
+			do {
+				try item.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+			}
+			catch {
+				print("error while saving to disk")
+			}
+		}
+	}
+
 
 	//******************************************************************************************************************
 	//* MARK: - UIDropInteractionDelegate
@@ -56,6 +90,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 	func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
 		_ = session.loadObjects(ofClass: String.self, completion: { items in
 			self.objects.append(contentsOf: items)
+			self.save(items: items)
 			self.tableView.reloadData()
 		})
 	}
@@ -126,6 +161,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 	@objc
 	func insertNewObject(_ sender: Any) {
 		objects.insert("created string", at: 0)
+		self.save(items: [objects[0]])
 		let indexPath = IndexPath(row: 0, section: 0)
 		tableView.insertRows(at: [indexPath], with: .automatic)
 	}
