@@ -13,9 +13,6 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 
 	var detailViewController: DetailViewController? = nil
 	var objects = [String]()
-	var row = 0
-
-	let appGroupIdentifier = "group.de.macundi.Shelf"
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,9 +26,6 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 		    detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
 		}
 
-		//gespeicherte Texte laden
-		self.objects = self.load()
-
 		//UIDrag- & UIDropInteraction vorbereiten
 		let dropInteraction = UIDropInteraction(delegate: self)
 		self.tableView.addInteraction(dropInteraction)
@@ -40,6 +34,9 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
+		//gespeicherte Texte laden
+		self.objects = self.load()
+
 		clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
 		super.viewWillAppear(animated)
 	}
@@ -50,7 +47,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 	//******************************************************************************************************************
 	func save(items:[String]) {
 		let fileManager = FileManager.default
-		guard let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)
+		guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last
 		else {
 				return
 		}
@@ -61,7 +58,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 			df.dateStyle = .medium
 			df.timeStyle = .short
 
-			let path = groupURL.appendingPathComponent("snippet"+df.string(from: Date())+".txt")
+			let path = documentsURL.appendingPathComponent("snippet"+df.string(from: Date())+".txt")
 			print(path)
 			do {
 				try item.write(to: path, atomically: true, encoding: String.Encoding.utf8)
@@ -77,7 +74,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 
 		//preapare IO
 		let fileManager = FileManager.default
-		guard let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)
+		guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).last
 			else {
 				return items
 		}
@@ -85,7 +82,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 		//load driectory entries
 		var fileList = [String]()
 		do {
-			 fileList = try fileManager.contentsOfDirectory(atPath: groupURL.path)
+			 fileList = try fileManager.contentsOfDirectory(atPath: documentsURL.path)
 		} catch _ {
 			print("error loading file-list")
 			return items
@@ -94,7 +91,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 		//load files
 		for file in fileList {
 			if file.contains(".txt") {
-				let filePath = groupURL.appendingPathComponent(file)
+				let filePath = documentsURL.appendingPathComponent(file)
 				do {
 					let item = try String.init(contentsOf: filePath)
 					items.append(item)
@@ -104,10 +101,8 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 				}
 			}
 		}
-
 		return items
 	}
-
 
 	//******************************************************************************************************************
 	//* MARK: - UIDropInteractionDelegate

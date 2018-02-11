@@ -13,21 +13,7 @@
 		02269A24201E07EE00A98B94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02269A22201E07EE00A98B94 /* Main.storyboard */; };
 		02269A26201E07EE00A98B94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02269A25201E07EE00A98B94 /* Assets.xcassets */; };
 		02269A29201E07EE00A98B94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02269A27201E07EE00A98B94 /* LaunchScreen.storyboard */; };
-		029DACEC202F0963003E0D9C /* FileProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029DACEB202F0963003E0D9C /* FileProviderExtension.swift */; };
-		029DACEE202F0963003E0D9C /* FileProviderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029DACED202F0963003E0D9C /* FileProviderItem.swift */; };
-		029DACF0202F0963003E0D9C /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029DACEF202F0963003E0D9C /* FileProviderEnumerator.swift */; };
-		029DACF5202F0963003E0D9C /* ShelfArchive.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 029DACE9202F0963003E0D9C /* ShelfArchive.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		029DACF3202F0963003E0D9C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 02269A11201E07EE00A98B94 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 029DACE8202F0963003E0D9C;
-			remoteInfo = ShelfArchive;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		029DACF9202F0963003E0D9C /* Embed App Extensions */ = {
@@ -36,7 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				029DACF5202F0963003E0D9C /* ShelfArchive.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,24 +37,10 @@
 		02269A25201E07EE00A98B94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02269A28201E07EE00A98B94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02269A2A201E07EE00A98B94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		029DACE9202F0963003E0D9C /* ShelfArchive.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShelfArchive.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		029DACEB202F0963003E0D9C /* FileProviderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderExtension.swift; sourceTree = "<group>"; };
-		029DACED202F0963003E0D9C /* FileProviderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderItem.swift; sourceTree = "<group>"; };
-		029DACEF202F0963003E0D9C /* FileProviderEnumerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileProviderEnumerator.swift; sourceTree = "<group>"; };
-		029DACF1202F0963003E0D9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		029DACF2202F0963003E0D9C /* ShelfArchive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShelfArchive.entitlements; sourceTree = "<group>"; };
-		029DACFA202F09B2003E0D9C /* Shelf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shelf.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		02269A16201E07EE00A98B94 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		029DACE6202F0963003E0D9C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -83,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				02269A1B201E07EE00A98B94 /* Shelf */,
-				029DACEA202F0963003E0D9C /* ShelfArchive */,
 				02269A1A201E07EE00A98B94 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,7 +62,6 @@
 			isa = PBXGroup;
 			children = (
 				02269A19201E07EE00A98B94 /* Shelf.app */,
-				029DACE9202F0963003E0D9C /* ShelfArchive.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,7 +69,6 @@
 		02269A1B201E07EE00A98B94 /* Shelf */ = {
 			isa = PBXGroup;
 			children = (
-				029DACFA202F09B2003E0D9C /* Shelf.entitlements */,
 				02269A1C201E07EE00A98B94 /* AppDelegate.swift */,
 				02269A1E201E07EE00A98B94 /* MasterViewController.swift */,
 				02269A20201E07EE00A98B94 /* DetailViewController.swift */,
@@ -110,18 +78,6 @@
 				02269A2A201E07EE00A98B94 /* Info.plist */,
 			);
 			path = Shelf;
-			sourceTree = "<group>";
-		};
-		029DACEA202F0963003E0D9C /* ShelfArchive */ = {
-			isa = PBXGroup;
-			children = (
-				029DACEB202F0963003E0D9C /* FileProviderExtension.swift */,
-				029DACED202F0963003E0D9C /* FileProviderItem.swift */,
-				029DACEF202F0963003E0D9C /* FileProviderEnumerator.swift */,
-				029DACF1202F0963003E0D9C /* Info.plist */,
-				029DACF2202F0963003E0D9C /* ShelfArchive.entitlements */,
-			);
-			path = ShelfArchive;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,29 +95,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				029DACF4202F0963003E0D9C /* PBXTargetDependency */,
 			);
 			name = Shelf;
 			productName = Shelf;
 			productReference = 02269A19201E07EE00A98B94 /* Shelf.app */;
 			productType = "com.apple.product-type.application";
-		};
-		029DACE8202F0963003E0D9C /* ShelfArchive */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 029DACF8202F0963003E0D9C /* Build configuration list for PBXNativeTarget "ShelfArchive" */;
-			buildPhases = (
-				029DACE5202F0963003E0D9C /* Sources */,
-				029DACE6202F0963003E0D9C /* Frameworks */,
-				029DACE7202F0963003E0D9C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ShelfArchive;
-			productName = ShelfArchive;
-			productReference = 029DACE9202F0963003E0D9C /* ShelfArchive.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -178,13 +116,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
-					};
-					029DACE8202F0963003E0D9C = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -202,7 +136,6 @@
 			projectRoot = "";
 			targets = (
 				02269A18201E07EE00A98B94 /* Shelf */,
-				029DACE8202F0963003E0D9C /* ShelfArchive */,
 			);
 		};
 /* End PBXProject section */
@@ -215,13 +148,6 @@
 				02269A29201E07EE00A98B94 /* LaunchScreen.storyboard in Resources */,
 				02269A26201E07EE00A98B94 /* Assets.xcassets in Resources */,
 				02269A24201E07EE00A98B94 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		029DACE7202F0963003E0D9C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,25 +164,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		029DACE5202F0963003E0D9C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				029DACEC202F0963003E0D9C /* FileProviderExtension.swift in Sources */,
-				029DACEE202F0963003E0D9C /* FileProviderItem.swift in Sources */,
-				029DACF0202F0963003E0D9C /* FileProviderEnumerator.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		029DACF4202F0963003E0D9C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 029DACE8202F0963003E0D9C /* ShelfArchive */;
-			targetProxy = 029DACF3202F0963003E0D9C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		02269A22201E07EE00A98B94 /* Main.storyboard */ = {
@@ -390,7 +298,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Shelf/Shelf.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E2BGP67TX9;
 				INFOPLIST_FILE = Shelf/Info.plist;
@@ -407,45 +314,12 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Shelf/Shelf.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E2BGP67TX9;
 				INFOPLIST_FILE = Shelf/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.macundi.Shelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		029DACF6202F0963003E0D9C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ShelfArchive/ShelfArchive.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E2BGP67TX9;
-				INFOPLIST_FILE = ShelfArchive/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.macundi.Shelf.ShelfArchive;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		029DACF7202F0963003E0D9C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = ShelfArchive/ShelfArchive.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = E2BGP67TX9;
-				INFOPLIST_FILE = ShelfArchive/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.macundi.Shelf.ShelfArchive;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -468,15 +342,6 @@
 			buildConfigurations = (
 				02269A2E201E07EE00A98B94 /* Debug */,
 				02269A2F201E07EE00A98B94 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		029DACF8202F0963003E0D9C /* Build configuration list for PBXNativeTarget "ShelfArchive" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				029DACF6202F0963003E0D9C /* Debug */,
-				029DACF7202F0963003E0D9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
