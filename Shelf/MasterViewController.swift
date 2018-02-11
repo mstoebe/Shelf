@@ -29,17 +29,14 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 		    detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
 		}
 
-		//******************************************************************************************************************
-		//* MARK: - UIDrag- & UIDropInteraction vorbereiten
-		//******************************************************************************************************************
+		//gespeicherte Texte laden
+		self.objects = self.load()
+
+		//UIDrag- & UIDropInteraction vorbereiten
 		let dropInteraction = UIDropInteraction(delegate: self)
 		self.tableView.addInteraction(dropInteraction)
 
 		self.tableView.dragDelegate = self
-
-		//******************************************************************************************************************
-		//* MARK: - Speichern im Group-Conteiner vorbereiten
-		//******************************************************************************************************************
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +70,42 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 				print("error while saving to disk")
 			}
 		}
+	}
+
+	func load() -> [String] {
+		var items = [String]()
+
+		//preapare IO
+		let fileManager = FileManager.default
+		guard let groupURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupIdentifier)
+			else {
+				return items
+		}
+
+		//load driectory entries
+		var fileList = [String]()
+		do {
+			 fileList = try fileManager.contentsOfDirectory(atPath: groupURL.path)
+		} catch _ {
+			print("error loading file-list")
+			return items
+		}
+
+		//load files
+		for file in fileList {
+			if file.contains(".txt") {
+				let filePath = groupURL.appendingPathComponent(file)
+				do {
+					let item = try String.init(contentsOf: filePath)
+					items.append(item)
+				}
+				catch {
+					print("error loading file")
+				}
+			}
+		}
+
+		return items
 	}
 
 
