@@ -90,15 +90,13 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 
 		//load files
 		for file in fileList {
-			if file.contains(".txt") {
-				let filePath = documentsURL.appendingPathComponent(file)
-				do {
-					let item = try String.init(contentsOf: filePath)
-					items.append(item)
-				}
-				catch {
-					print("error loading file")
-				}
+			let filePath = documentsURL.appendingPathComponent(file)
+			do {
+				let item = try String.init(contentsOf: filePath)
+				items.append(item)
+			}
+			catch {
+				print("error loading file")
 			}
 		}
 		return items
@@ -108,7 +106,7 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 	//* MARK: - UIDropInteractionDelegate
 	//******************************************************************************************************************
 	func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-		return session.hasItemsConforming(toTypeIdentifiers: [kUTTypeText as String])
+		return session.hasItemsConforming(toTypeIdentifiers: [kUTTypePlainText as String])
 	}
 
 	func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
@@ -193,9 +191,6 @@ class MasterViewController: UITableViewController, UIDropInteractionDelegate, UI
 		let indexPath = IndexPath(row: 0, section: 0)
 		tableView.insertRows(at: [indexPath], with: .automatic)
 	}
-
-
-
 
 }
 
