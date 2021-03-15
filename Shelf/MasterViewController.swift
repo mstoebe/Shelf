@@ -8,6 +8,7 @@
 
 import MobileCoreServices
 import UIKit
+import Foundation
 
 class MasterViewController: UITableViewController, UIDropInteractionDelegate, UITableViewDragDelegate {
 
